@@ -3,7 +3,12 @@ import asyncHandler from "express-async-handler";
 import { body, validationResult } from "express-validator";
 
 export const get_posts = asyncHandler(async (req, res) => {
-  const posts = await prisma.post.findMany({});
+  const posts = await prisma.post.findMany({
+    where: {
+      status: "PUBLISHED",
+    },
+  });
+
   res.json({ posts });
 });
 
@@ -15,9 +20,19 @@ export const get_post = asyncHandler(async (req, res) => {
       where: {
         id: postId,
       },
+      include: {
+        comments: true,
+        author: true,
+      },
     });
 
-    res.json(post);
+    const user = await prisma.user.findFirst({
+      where: {
+        id: req.user.id,
+      },
+    });
+
+    res.json({ post, user });
   } catch (err) {
     res.json(err);
   }
@@ -30,6 +45,9 @@ export const get_comments = asyncHandler(async (req, res) => {
     const comments = await prisma.comment.findMany({
       where: {
         postId: postId,
+      },
+      include: {
+        author: true,
       },
     });
 
@@ -75,8 +93,17 @@ export const post_comment = [
           },
         });
 
+        const comment = await prisma.comment.findFirst({
+          where: {
+            id: newComment.id,
+          },
+          include: {
+            author: true,
+          },
+        });
+
         return res.status(200).json({
-          comment: newComment,
+          comment,
           message: "Comment added successfully",
         });
       } catch (err) {
@@ -107,7 +134,19 @@ export const update_comment = asyncHandler(async (req, res) => {
         },
       });
 
-      return res.json({ message: "Comment updated successfully" });
+      const updatedComment = await prisma.comment.findFirst({
+        where: {
+          id: commentId,
+        },
+        include: {
+          author: true,
+        },
+      });
+
+      return res.json({
+        message: "Comment updated successfully",
+        comment: updatedComment,
+      });
     } else {
       return res
         .status(405)

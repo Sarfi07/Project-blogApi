@@ -10,6 +10,7 @@ import authRouter from "./routes/author.js";
 import readerRouter from "./routes/reader.js";
 
 import passport from "./config/passport.js";
+import cors from "cors";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -27,6 +28,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(passport.initialize());
+
+app.use(cors());
 
 app.use("/", indexRouter);
 app.use("/author", authRouter);
