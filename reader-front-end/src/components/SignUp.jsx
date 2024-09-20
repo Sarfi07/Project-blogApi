@@ -60,6 +60,7 @@ function Signup() {
             onChange={(e) => setUsername(e.target.value)}
             required
             className="w-full px-3 py-2 border rounded"
+            autoFocus
           />
         </div>
 

@@ -43,7 +43,7 @@ export const create_post = [
   body("title", "title cannot be empty").trim().isLength({ min: 1 }),
   asyncHandler(async (req, res) => {
     const err = validationResult(req);
-
+    console.log(req.body);
     if (!err.isEmpty()) {
       return res.status(417).json(err);
     }

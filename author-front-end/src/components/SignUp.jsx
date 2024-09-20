@@ -22,7 +22,7 @@ function Signup() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ username, name, password, role: "READER" }),
+          body: JSON.stringify({ username, name, password, role: "AUTHOR" }),
         }
       );
 
@@ -60,6 +60,7 @@ function Signup() {
             onChange={(e) => setUsername(e.target.value)}
             required
             className="w-full px-3 py-2 border rounded"
+            autoFocus
           />
         </div>
 

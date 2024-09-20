@@ -28,7 +28,7 @@ router.get("/dashboard", (req, res) => {
 
 router.get("/posts", get_posts);
 
-router.post("/posts/create", create_post);
+router.post("/posts", create_post);
 router.get("/posts/:postId", get_post);
 router.put("/posts/:postId", update_post);
 router.delete("/posts/:postId", delete_post);

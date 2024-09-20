@@ -42,21 +42,11 @@ router.post("/auth/signup", async (req, res, next) => {
     });
 
     // Send a successful response back
-    return res
-      .status(200)
-      .json({ message: "User signed up successfully", user });
+    return res.status(200).json({ message: "User signed up successfully" });
   } catch (err) {
     // Catch any errors and send an error response
     return res.status(403).json({ message: "Unable to sign you up.", err });
   }
-});
-
-// Route for logout
-router.post("/auth/logout", (req, res, next) => {
-  req.logout((err) => {
-    if (err) return next(err);
-    res.json({ message: "Logged out successfully" });
-  });
 });
 
 export default router;

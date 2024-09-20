@@ -17,6 +17,12 @@ function Header() {
 
       {/* Right side - Logout link */}
       <button
+        onClick={() => navigate("/posts/create")}
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4"
+      >
+        Create Post
+      </button>
+      <button
         onClick={handleLogout}
         className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
       >

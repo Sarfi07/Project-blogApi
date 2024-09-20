@@ -11,13 +11,16 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3011/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password, role: "AUTHOR" }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/login`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username, password, role: "AUTHOR" }),
+        }
+      );
 
       const result = await response.json();
 
@@ -52,6 +55,7 @@ function Login() {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               className="w-full p-2 border rounded-md border-gray-300 focus:border-blue-500 focus:outline-none"
+              autoFocus
             />
           </div>
           <div>

@@ -65,7 +65,7 @@ const BlogPostForm = () => {
         );
       } else {
         // Create new post
-        await fetch("${import.meta.env.VITE_BACKEND_URL}/author/posts", {
+        await fetch(`${import.meta.env.VITE_BACKEND_URL}/author/posts`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -102,6 +102,7 @@ const BlogPostForm = () => {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
+            autoFocus
           />
         </div>
 
