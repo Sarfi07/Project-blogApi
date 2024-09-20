@@ -19,6 +19,7 @@ export const get_post = asyncHandler(async (req, res) => {
     const post = await prisma.post.findFirst({
       where: {
         id: postId,
+        status: "PUBLISHED",
       },
       include: {
         comments: true,
@@ -32,7 +33,11 @@ export const get_post = asyncHandler(async (req, res) => {
       },
     });
 
-    res.json({ post, user });
+    if (post) {
+      res.json({ post, user });
+    } else {
+      res.json({ user });
+    }
   } catch (err) {
     res.json(err);
   }

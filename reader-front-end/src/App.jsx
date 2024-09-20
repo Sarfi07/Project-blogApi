@@ -4,6 +4,8 @@ import Login from "./components/Login";
 import HomePage from "./components/Homepage";
 import PrivateRoute from "./components/PrivateRoute";
 import PostDetail from "./components/PostDetail";
+import Signup from "./components/SignUp";
+import ErrorPage from "./components/ErrorPage";
 
 function App() {
   return (
@@ -27,6 +29,10 @@ function App() {
               </PrivateRoute>
             }
           />
+          <Route path="/signup" element={<Signup />} />
+
+          {/* Fallback for unmatched paths */}
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </div>
     </Router>

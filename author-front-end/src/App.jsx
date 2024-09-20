@@ -4,6 +4,8 @@ import PrivateRoute from "./components/PrivateRoutes";
 import HomePage from "./components/Index";
 import PostDetail from "./components/PostDetail";
 import BlogPostForm from "./components/Post_form";
+import Signup from "./components/SignUp";
+import ErrorPage from "./components/ErrorPage";
 
 function App() {
   return (
@@ -43,6 +45,11 @@ function App() {
               </PrivateRoute>
             }
           />
+
+          <Route path="/signup" element={<Signup />} />
+
+          {/* Fallback route for unmatched paths */}
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </div>
     </Router>

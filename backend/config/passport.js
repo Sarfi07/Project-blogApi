@@ -6,21 +6,41 @@ import prisma from "../utils/prismaClient.js";
 import "dotenv/config";
 import bcrypt from "bcrypt";
 
-// Local Strategy for login
+// Use passReqToCallback to access the role in the request body
 passport.use(
-  new LocalStrategy(async (username, password, done) => {
-    try {
-      const user = await prisma.user.findUnique({ where: { username } });
+  new LocalStrategy(
+    {
+      usernameField: "username",
+      passwordField: "password",
+      passReqToCallback: true,
+    },
+    async (req, username, password, done) => {
+      const { role } = req.body; // Extract the role from req.body
 
-      if (!user || !(password === user.password)) {
-        return done(null, false, { message: "Invalid credentials" });
+      try {
+        // Find the user by username and role
+        const user = await prisma.user.findFirst({
+          where: { username, role },
+        });
+        console.log(req.body);
+        // If user is not found or role does not match
+        if (!user) {
+          return done(null, false, { message: "Invalid credentials or role" });
+        }
+
+        // Compare passwords
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+          return done(null, false, { message: "Invalid credentials" });
+        }
+
+        // Return the user if authentication succeeds
+        return done(null, user);
+      } catch (err) {
+        return done(err);
       }
-
-      return done(null, user);
-    } catch (err) {
-      return done(err);
     }
-  })
+  )
 );
 
 // JWT strategy options

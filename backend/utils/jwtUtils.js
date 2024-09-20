@@ -2,7 +2,7 @@
 import jwt from "jsonwebtoken";
 
 const SECRET_KEY = process.env.SECRET_KEY;
-const EXPIRATION_TIME = "25h";
+const EXPIRATION_TIME = "2h";
 
 // Function to generate a JWT token
 export const generateToken = (user) => {

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Editor } from "@tinymce/tinymce-react";
+import Header from "./Header";
 
 const BlogPostForm = () => {
   const { postId } = useParams();
@@ -81,6 +82,7 @@ const BlogPostForm = () => {
 
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-8">
+      <Header />
       <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
         {postId ? "Edit Post" : "Create a New Blog Post"}
       </h2>

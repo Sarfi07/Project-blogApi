@@ -16,7 +16,7 @@ function Login() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ username, password, role: "AUTHOR" }),
       });
 
       const result = await response.json();
@@ -70,6 +70,7 @@ function Login() {
               className="w-full p-2 border rounded-md border-gray-300 focus:border-blue-500 focus:outline-none"
             />
           </div>
+
           <button
             type="submit"
             className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md"
@@ -88,6 +89,13 @@ function Login() {
             </p>
           )}
         </form>
+
+        <a
+          href="/signup"
+          className="text-blue-500 hover:text-blue-700 font-semibold underline"
+        >
+          Sign up instead.
+        </a>
       </div>
     </div>
   );

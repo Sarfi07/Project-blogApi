@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Header from "./Header";
 
 function HomePage() {
   const [posts, setPosts] = useState([]);
@@ -19,6 +20,7 @@ function HomePage() {
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
+      <Header />
       <h1 className="text-3xl font-bold mb-6 text-center">Posts</h1>
       <ul className="space-y-4">
         {posts.map((post) => (

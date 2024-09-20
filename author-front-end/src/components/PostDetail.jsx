@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import DOMPurify from "dompurify";
+import Header from "./Header";
 
 function PostDetail() {
   const { postId } = useParams();
@@ -223,6 +224,7 @@ function PostDetail() {
 
   return (
     <div className="max-w-2xl mx-auto p-4">
+      <Header />
       <article className="bg-white p-6 rounded-lg shadow-md mb-6">
         <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
         <div className="text-gray-600 mb-4">
