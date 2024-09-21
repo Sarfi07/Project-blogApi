@@ -12,6 +12,7 @@ function App() {
     <Router>
       <div>
         <Routes>
+          <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route
             path="/"
@@ -45,8 +46,6 @@ function App() {
               </PrivateRoute>
             }
           />
-
-          <Route path="/signup" element={<Signup />} />
 
           {/* Fallback route for unmatched paths */}
           <Route path="*" element={<ErrorPage />} />
