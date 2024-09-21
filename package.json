@@ -8,5 +8,10 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "private": true,
+  "workspaces": [
+    "author-front-end",
+    "reader-front-end"
+  ]
 }
